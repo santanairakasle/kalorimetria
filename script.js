@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   const fuelSelect = document.getElementById("fuelSelect");
   fuels.forEach(fuel => {
@@ -36,21 +35,29 @@ document.addEventListener("DOMContentLoaded", () => {
     let c = specificHeatUnit === "J/kgC" ? specificHeat / 1000 : specificHeat;
 
     const deltaT = finalTemp - initialTemp;
-    const Q1 = (m_water + m_calorimeter) * c * deltaT;
+    
+    // CAMBIO A Q_total Y CÁLCULO
+    const Q_total = (m_water + m_calorimeter) * c * deltaT;
 
     let Q2 = 0;
     let resultHTML = `<h3>📊 Emaitzak:</h3>`;
-resultHTML += `<p>🔧 Ur eta kalorimetroaren berotzeko behar den beroa (Q₁): <strong>${Q1.toFixed(2)} J</strong></p>`;
+    
+    // RESULTADO DEL CALOR TOTAL ACTUALIZADO
+    resultHTML += `<p>🔥 Bero osoa (ura + kalorimetroa) (Q_total): <strong>${Q_total.toFixed(2)} J</strong></p>`;
+    
     let eta = isNaN(efficiency) ? 1 : efficiency / 100;
 
     if (!isNaN(fuelAmount)) {
       let n = fuelAmountUnit === "g" ? fuelAmount / fuel.molarMass : fuelAmount;
       Q2 = n * Math.abs(fuel.enthalpy) * 1000;
       resultHTML += `<p>🔥 Erregaiak emandako beroa: <strong>${Q2.toFixed(2)} J</strong></p>`;
-      const deltaH_calc = -(Q1 / n) / 1000;
+      
+      // USO DE Q_total PARA EL CÁLCULO DE ENTALPÍA
+      const deltaH_calc = -(Q_total / n) / 1000;
       resultHTML += `<p>🧪 Entalpia kalkulatua: <strong>${deltaH_calc.toFixed(2)} kJ/mol</strong></p>`;
     } else {
-      const n_needed = Q1 / (Math.abs(fuel.enthalpy) * 1000 * eta);
+      // USO DE Q_total PARA EL CÁLCULO DE MASA NECESARIA
+      const n_needed = Q_total / (Math.abs(fuel.enthalpy) * 1000 * eta);
       const m_needed = n_needed * fuel.molarMass;
       resultHTML += `<p>🧪 Behar den erregai kantitatea: <strong>${n_needed.toFixed(4)} mol</strong> (${m_needed.toFixed(2)} g)</p>`;
     }
