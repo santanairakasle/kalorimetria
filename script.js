@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let Q2 = 0;
     let resultHTML = `<h3>📊 Emaitzak:</h3>`;
+resultHTML += `<p>🔧 Ur eta kalorimetroaren berotzeko behar den beroa (Q₁): <strong>${Q1.toFixed(2)} J</strong></p>`;
     let eta = isNaN(efficiency) ? 1 : efficiency / 100;
 
     if (!isNaN(fuelAmount)) {
