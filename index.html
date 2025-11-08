@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💧 Kalorimetria Simulagailua</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>💧 Kalorimetria Simulagailua</h1>
+    <form id="calorimetry-form">
+      <div class="form-row">
+        <label>💧 Uraren kantitatea:</label>
+        <input type="number" id="waterAmount" required />
+        <select id="waterUnit">
+          <option value="g">g</option>
+          <option value="kg">kg</option>
+          <option value="mL">mL</option>
+          <option value="L">L</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>⚙️ Kalorimetroaren ur baliokidea:</label>
+        <input type="number" id="calorimeterWaterEquivalent" required />
+        <select id="calorimeterUnit">
+          <option value="g">g</option>
+          <option value="kg">kg</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>🌡️ Hasierako tenperatura (°C):</label>
+        <input type="number" id="initialTemp" required />
+      </div>
+      <div class="form-row">
+        <label>🌡️ Amaierako tenperatura (°C):</label>
+        <input type="number" id="finalTemp" required />
+      </div>
+      <div class="form-row">
+        <label>🔥 Bero espezifikoa:</label>
+        <input type="number" id="specificHeat" value="4.18" required />
+        <select id="specificHeatUnit">
+          <option value="J/gC">J/g·°C</option>
+          <option value="J/kgC">J/kg·°C</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>🧪 Erregaia:</label>
+        <select id="fuelSelect" required></select>
+      </div>
+      <div class="form-row">
+        <label>🧯 Erregai kantitatea (aukerakoa):</label>
+        <input type="number" id="fuelAmount" />
+        <select id="fuelAmountUnit">
+          <option value="mol">mol</option>
+          <option value="g">g</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>📈 Etekina % (aukerakoa):</label>
+        <input type="number" id="efficiency" min="0" max="100" />
+      </div>
+      <button type="submit">Kalkulatu</button>
+    </form>
+    <div id="results"></div>
+  </div>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
